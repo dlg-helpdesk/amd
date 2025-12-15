@@ -1,0 +1,68 @@
+Full Deployment Guide: FastAPI WebSocket with Docker Compose
+
+STEP 1: Install Docker (if not already installed)
+
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg lsb-release
+
+
+Add Docker’s official repository:
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+Install Docker Engine:
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+Verify:
+docker --version
+docker compose version
+
+
+STEP 2: Clone project
+cd /opt
+git clone https://github.com/dlg-helpdesk/amd
+cd amd
+
+mkdir -p /opt/amd/debug_wavs
+mkdir -p /opt/amd/model
+
+STEP 3: Build and Start Container
+# Stop/remove any old containers
+docker-compose down
+
+# Build image from Dockerfile
+docker-compose build --no-cache
+
+# Start container in detached mode
+
+STEP 4: Verify
+docker-compose ps
+
+Check that container is running:
+
+docker-compose ps
+
+
+View logs in real-time:
+
+docker-compose logs -f
+
+
+FastAPI should start
+
+/predict endpoint accessible: http://<server-ip>:8000/predict
+
+WebSocket endpoint accessible: ws://<server-ip>:8000/ws/predict
+
+Debug WAVs will appear in /opt/amd/debug_wavs
+
+STEP 6: Updating the model If you replace audio_model.pkl or label_encoder.pkl in /opt/amd/model:
+docker-compose down
+docker-compose up -d
