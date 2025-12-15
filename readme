@@ -1,0 +1,25 @@
+Folder Requirements.
+
+[For Training]
+
+Put training data here.
+
+dataset/batch1/human
+dataset/batch1/machine
+dataset/batch1/silent
+
+Note: you can group training data i.e batch1, batch2, batch3.
+
+Run python train_model.py
+
+Once it finishes the model will now be on the model folder.
+
+If you want to test the model accuracy make sure to put test data sets on
+
+test_dataset/human
+test_dataset/machine
+test_dataset/silent
+
+Then run python test_model.py
+
+Once you're happy with the accuracy export the model to the Api and Websocket server
