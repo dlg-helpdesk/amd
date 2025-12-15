@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: amd_ai_api
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./model:/app/model        # live model folder
+      - ./debug_wavs:/app/debug_wavs  # live debug recordings
