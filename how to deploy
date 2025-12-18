@@ -148,3 +148,12 @@ sudo ln -s /etc/nginx/sites-available/irisamd /etc/nginx/sites-enabled/
 
 sudo nginx -t
 sudo systemctl reload nginx
+
+=============DEPLOYING NEW UPDATES==============
+cd /opt/amd
+git pull
+docker-compose build --no-cache
+docker-compose down
+docker-compose up -d
+docker-compose logs -f
+==========================================
