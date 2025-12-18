@@ -56,7 +56,7 @@ VICIDIAL_SR = 8000       # PCM rate from VICIdial
 BYTES_PER_SAMPLE = 2
 SAMPLE_LIMIT = int(VICIDIAL_SR * TARGET_DURATION * BYTES_PER_SAMPLE)
 DEBUG_DIR = "debug_wavs"
-DEBUG_RECORDING_LIMIT = 10
+DEBUG_RECORDING_LIMIT = 26000
 
 @app.websocket("/ws/predict")
 async def websocket_predict(websocket: WebSocket):
