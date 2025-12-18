@@ -112,7 +112,7 @@ async def websocket_predict(websocket: WebSocket):
                         sf.write(debug_path, prev_pcm_data, samplerate=VICIDIAL_SR, format="WAV")
                         print(f"[INFO] Saved debug WAV: {debug_path}")
                     else:
-                        print(f"[INFO] SKIPPINING DEBUG WAV: {pred_label_lower}")
+                        print(f"[INFO] SKIPPING DEBUG WAV: {pred_label_lower}")
 
 
             # Remove only processed chunks
