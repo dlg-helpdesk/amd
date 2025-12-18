@@ -105,11 +105,15 @@ async def websocket_predict(websocket: WebSocket):
                     # Do NOT save anymore
                     print(f"[INFO] Debug WAV limit reached ({DEBUG_RECORDING_LIMIT}). Skipping save.")
                 else:
-                    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-                    unique_id = uuid.uuid4().hex[:8]
-                    debug_path = f"debug_wavs/debug_{timestamp}_{unique_id}_{pred_label_lower}.wav"
-                    sf.write(debug_path, prev_pcm_data, samplerate=VICIDIAL_SR, format="WAV")
-                    print(f"[INFO] Saved debug WAV: {debug_path}")
+                    if pred_label_lower == 'human':
+                        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                        unique_id = uuid.uuid4().hex[:8]
+                        debug_path = f"debug_wavs/debug_{timestamp}_{unique_id}_{pred_label_lower}.wav"
+                        sf.write(debug_path, prev_pcm_data, samplerate=VICIDIAL_SR, format="WAV")
+                        print(f"[INFO] Saved debug WAV: {debug_path}")
+                    else:
+                        print(f"[INFO] SKIPPINING DEBUG WAV: {pred_label_lower}")
+
 
             # Remove only processed chunks
             buffer_bytes = buffer_bytes[num_full_chunks*SAMPLE_LIMIT:]
